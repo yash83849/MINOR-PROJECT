@@ -1,101 +1,141 @@
-import Image from "next/image";
+'use client';
+import axios from 'axios';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react'
 
-export default function Home() {
+const Home = () => {
+
+  const [businessList, setBusinessList] = useState([]);
+
+  const fetchBusinessData = async () => {
+    const res = await axios.get('http://localhost:5000/business/getall')
+    console.log(res.data);
+    setBusinessList(res.data);
+  }
+
+  useEffect(() => {
+    fetchBusinessData();
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="bg-white pb-6 sm:pb-8 lg:pb-12">
+          <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+
+            <section className="relative rounded-lg">
+
+              <img
+                src="https://media.secondstreetapp.com/2888706"
+                loading="lazy"
+                alt="Photo by Fakurian Design"
+                className=" inset-0 h-full w-full object-cover object-center"
+              />
+            </section>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="bg-white py-6 sm:py-8 lg:py-12">
+          <div className="mx-auto max-w-screen-lg px-4 md:px-8">
+
+            <div className="mb-8 md:mb-12">
+              <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+                Our Near Local Business
+              </h2>
+              <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                Beauty , Education , Hostels , ClothDriers , Coffee Shop
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6 rounded-lg bg-indigo-500 p-6 md:grid-cols-4 md:gap-8 md:p-8">
+
+              <div className="flex flex-col items-center">
+                <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
+
+                </div>
+                <div className="text-sm text-indigo-200 sm:text-base">Car Rental</div>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="text-xl font-bold text-white sm:text-2xl md:text-3xl">
+
+                </div>
+                <div className="text-sm text-indigo-200 sm:text-base">Banquet Hall</div>
+              </div>
+
+              <div className="flex flex-col items-center">
+
+                <div className="text-sm text-indigo-200 sm:text-base">Online Chef Service</div>
+              </div>
+
+              <div className="flex flex-col items-center">
+
+                <div className="text-sm text-indigo-200 sm:text-base">
+                  Plumbers
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div className="grid max-w-[90%] mx-auto gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+          {/* product - start */}
+
+          {
+            businessList.slice(0, 4).map(business => (
+              <div key={business._id}>
+                <Link
+                  href={'/view-business/' + business._id}
+                  className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 lg:mb-3"
+                >
+                  <img
+                    src={business.image}
+                    loading="lazy"
+                    alt="Photo by Rachit Tank"
+                    className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+                  />
+                </Link>
+                <div>
+                  <p
+                    className="hover:gray-800 mb-1 text-gray-500 transition duration-100 lg:text-lg"
+                  >
+                    {business.category}
+                  </p>
+                  <div className="flex items-end gap-2">
+                    <span className="font-bold text-gray-800 lg:text-lg">{business.name}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+          {/* product - end */}
+        </div>
+
+        <div className="bg-white py-6 sm:py-8 lg:py-12">
+          <div className="mx-auto max-w-screen-xl px-4 md:px-8">
+
+            <div className="mb-10 md:mb-16">
+              <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+                We Hope to Connect with Millions of Customer on our Listing Website
+              </h2>
+              <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+                Thankyou For Visting on our Website
+              </p>
+            </div>
+          </div>
+
+
+
+        </div>
+
+
+      </>
+
     </div>
-  );
+  )
 }
+
+export default Home;

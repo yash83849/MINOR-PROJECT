@@ -1,6 +1,40 @@
-import React from 'react'
-
+'use client';
+import React from 'react';
+import { useFormik } from 'formik';
 const Contact = () => {
+  
+  // initializing formik
+  const contactForm = useFormik({
+    initialValues: {
+      firstname: '',
+      lastname: '',
+      email: '',
+      phonenumber: '',
+      details: '',
+    },
+    onSubmit: (values, { resetForm, setSubmitting }) => {
+
+      // setTimeout(() => {
+      // console.log(values);
+      // resetForm();
+      //}, 2000);
+
+      //fetch
+      axios.post('http://localhost:5000/user/add', values)
+        .then((result) => {
+          toast.success('User registered successfully');
+          resetForm();
+          router.push('/contact');
+        }).catch((err) => {
+          console.log(err);
+          toast.error('User registration failed');
+          setSubmitting(false);
+
+        });
+      // send values to backend
+    },
+    
+  });
   return (
     <div><>
     {/* Contact Us */}
